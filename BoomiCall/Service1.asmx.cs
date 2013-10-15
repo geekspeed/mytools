@@ -51,41 +51,7 @@ namespace BoomiCall
                 }
             }
 
-            //Bitmap bmpReturn = null;
-
-            //byte[] bytes = Convert.FromBase64String(imgtext.Split('*')[1]);
-            //MemoryStream memoryStream = new MemoryStream(bytes);
-
-            //memoryStream.Position = 0;
-
-            //bmpReturn = (Bitmap)Bitmap.FromStream(memoryStream);
-
-            //memoryStream.Close();
-            //memoryStream = null;
-            //bytes = null;
-
-            ////return bmpReturn;
-
-            //Bitmap bitmap = new Bitmap(96, 96);
-            //Graphics graphics = Graphics.FromImage(bitmap);
-            ////  bmpReturn = new Bitmap(bmpReturn, new Size(96, 96));
-            //bitmap.Save(fullOutputPath, ImageFormat.Jpeg);
-
-
-
-
-
-
-            //Image image;
-            //using (MemoryStream ms = new MemoryStream(bytes))
-            //{
-            //    image = Image.FromStream(ms);
-            //}
-
-            //image.Save(fullOutputPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-
-            //}
+           
         }
         
 
@@ -175,7 +141,7 @@ namespace BoomiCall
             using (MemoryStream stream = new MemoryStream(Convert.FromBase64String(base64String)))
             using (Image sourceImage = Image.FromStream(stream))
             {
-                //string fullOutputPath = @"C:\Users\vivek\Downloads\" + "asample" + ".jpg";
+                
                 MemoryStream ms =  new MemoryStream();
                 new Bitmap(sourceImage, new Size(96, 96)).Save(ms, ImageFormat.Jpeg);
 

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
@@ -66,16 +66,19 @@ namespace BoomiCall
                 string[] data = imgtext.Split('*');
                 if (data.Length == 2)
                 {
-                    long empNumber=-1;
-                    if (long.TryParse(data[0].ToString(), out empNumber))
+                   // long empNumber=-1;
+                    string empNumber = "";
+                    if (! String.IsNullOrEmpty(data[0].ToString()))
                     {
+                        empNumber = data[0].ToString().Trim();
+                        outObj.empNumber = empNumber;
                         if (!string.IsNullOrEmpty(data[1]))
                         {
                             byte[] jpegImage = ImageFromBase64String(data[1]);
                             if (jpegImage != null && jpegImage.Length > 0)
                             {
 
-                                outObj = SetADPhoto(jpegImage, empNumber.ToString());
+                                outObj = SetADPhoto(jpegImage, empNumber);
                             }
                             else
                             {
@@ -96,7 +99,7 @@ namespace BoomiCall
                     {
 
                         outObj.status = false;
-                        outObj.errmessage = "Employee Number is not an number:"+data[0].ToString();
+                        outObj.errmessage = "Employee Number is empty:"+data[0].ToString();
                     }
                 }
                 else
@@ -166,7 +169,7 @@ namespace BoomiCall
             wresponse retVal = new wresponse();
             try
             {
-
+                retVal.empNumber = employeeNumber;
                 var de = GetObjectDistinguishedName(employeeNumber);
 
                 de.Username = ConfigurationManager.AppSettings["AD_SERVER_USERNAME"];
@@ -214,6 +217,7 @@ namespace BoomiCall
     }
     public class wresponse
     {
+        public string empNumber = string.Empty;
         public bool status = false;
         public string errmessage = string.Empty;
         public wresponse()
